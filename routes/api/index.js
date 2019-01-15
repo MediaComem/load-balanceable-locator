@@ -13,7 +13,8 @@ router.get('/', (req, res) => res.send({ version }));
 // GET /api/location
 router.post('/locations', route(async (req, res) => {
 
-  const ip = req.body.ip || req.ip;
+  const rawIp = req.body.ip || req.ip;
+  const ip = rawIp.match(/^::ffff:/) ? rawIp.slice(7) : rawIp;
   if (typeof ip !== 'string' || !ip.match(/^\d+\.\d+\.\d+\.\d+$/)) {
     return res.send({ ip });
   }
