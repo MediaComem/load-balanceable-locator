@@ -1,6 +1,6 @@
 # Load Balanceable Locator
 
-A IP locator web application that can be used to demonstrate
+IP locator web application that can be used to demonstrate
 [load balancing][lb] with a [reverse proxy][rp] such as [Apache][apache] or [nginx][nginx].
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -55,10 +55,13 @@ npm start
 
 The following environment variables can be set to customize the application's behavior:
 
-Variable   | Default value | Description
-:---       | :---          | :---
-`BASE_URL` | *none*        | Base URL at which the application is deployed.
-`PORT`     | 3000          | Port on which to listen to.
+Variable           | Default value | Description
+:---               | :---          | :---
+`BACKGROUND_COLOR` | `white`       | Page background color (HTML color like `red` or color code like `#ccffff`).
+`BASE_URL`         | *none*        | Base URL at which the application is deployed.
+`PORT`             | 3000          | Port on which to listen to.
+
+Set the background color to visually differentiate application instances when doing load balancing.
 
 
 
