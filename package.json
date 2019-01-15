@@ -1,0 +1,29 @@
+{
+  "name": "locator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env DEBUG=locator:* nodemon ./bin/www",
+    "doctoc": "doctoc --notitle --github --maxlevel 3 README.md",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "debug": "~4.1.1",
+    "express": "~4.16.0",
+    "http-errors": "~1.7.1",
+    "lodash": "^4.17.11",
+    "morgan": "~1.9.0",
+    "pug": "^2.0.3",
+    "r2": "^2.0.1",
+    "stylus": "~0.54.5"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "doctoc": "^1.4.0",
+    "nodemon": "^1.18.9"
+  },
+  "engines": {
+    "node": "^10.14.0"
+  }
+}
