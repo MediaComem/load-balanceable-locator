@@ -15,7 +15,7 @@ router.post('/locations', route(async (req, res) => {
 
   const ip = req.body.ip || req.ip;
   if (typeof ip !== 'string' || !ip.match(/^\d+\.\d+\.\d+\.\d+$/)) {
-    return res.sendStatus(422);
+    return res.send({ ip });
   }
 
   const location = await r2(`https://ipapi.co/${ip}/json/`).json;

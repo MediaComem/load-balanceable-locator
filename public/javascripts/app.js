@@ -19,7 +19,7 @@ async function mounted() {
 
 async function submit(event) {
   event.preventDefault();
-  await fetchLocation(ip);
+  await fetchLocation(this.ip);
 }
 
 async function fetchLocation(ip) {
@@ -31,7 +31,7 @@ async function fetchLocation(ip) {
     body
   });
 
-  if (this.ipPlaceholder === 'IP address') {
+  if (this.ipPlaceholder === 'IP address' && resBody.location) {
     this.ipPlaceholder = resBody.ip;
   }
 }
@@ -51,6 +51,10 @@ async function fetchJson(url, options = {}) {
       ...(options.headers || {})
     }
   });
+
+  if (res.status < 200 || res.status > 299) {
+    throw new Error(`Server responded with unexpected status code ${res.status}`);
+  }
 
   return res.json();
 }
