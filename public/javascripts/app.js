@@ -4,22 +4,37 @@ const app = new Vue({
   mounted,
   data: {
     ip: '',
+    ipLocation: null,
     ipPlaceholder: 'IP address'
   },
   computed: {
   },
   methods: {
+    getHumanLocation,
+    hasIpLocation,
     submit
   }
 });
 
+function getHumanLocation() {
+  if (!this.ipLocation) {
+    return '';
+  }
+
+  return _.compact([ this.ipLocation.city, this.ipLocation.region, this.ipLocation.country ]).join(', ');
+}
+
+function hasIpLocation() {
+  return this.ipLocation && this.ipLocation.country;
+}
+
 async function mounted() {
-  await fetchLocation();
+  await fetchLocation.call(this);
 }
 
 async function submit(event) {
   event.preventDefault();
-  await fetchLocation(this.ip);
+  await fetchLocation.call(this, this.ip);
 }
 
 async function fetchLocation(ip) {
@@ -31,8 +46,9 @@ async function fetchLocation(ip) {
     body
   });
 
-  if (this.ipPlaceholder === 'IP address' && resBody.location) {
-    this.ipPlaceholder = resBody.ip;
+  this.ipLocation = resBody.location;
+  if (this.ipPlaceholder === 'IP address' && resBody.location && resBody.location.ip) {
+    this.ipPlaceholder = resBody.location.ip;
   }
 }
 
