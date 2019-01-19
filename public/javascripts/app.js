@@ -3,11 +3,12 @@ const app = new Vue({
   template: '#app-template',
   mounted,
   data: {
+    currentIp: null,
     ip: '',
-    ipLocation: null,
-    ipPlaceholder: 'IP address'
+    ipLocation: null
   },
   computed: {
+    ipPlaceholder
   },
   methods: {
     getHumanLocation,
@@ -26,6 +27,10 @@ function getHumanLocation() {
 
 function hasIpLocation() {
   return this.ipLocation && this.ipLocation.country;
+}
+
+function ipPlaceholder() {
+  return this.currentIp || 'Enter an IP address';
 }
 
 async function mounted() {
@@ -47,8 +52,8 @@ async function fetchLocation(ip) {
   });
 
   this.ipLocation = resBody.location;
-  if (this.ipPlaceholder === 'IP address' && resBody.location && resBody.location.ip) {
-    this.ipPlaceholder = resBody.location.ip;
+  if (!ip) {
+    this.currentIp = resBody.ip;
   }
 }
 
