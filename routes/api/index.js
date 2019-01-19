@@ -1,10 +1,12 @@
 const express = require('express');
 const createError = require('http-errors');
+const ipware = require('ipware');
 const r2 = require('r2');
 
 const { version } = require('../../package.json');
 const { route } = require('../utils');
 
+const getIp = ipware().get_ip;
 const router = express.Router();
 
 // GET /api
@@ -13,7 +15,7 @@ router.get('/', (req, res) => res.send({ version }));
 // GET /api/location
 router.post('/locations', route(async (req, res) => {
 
-  const rawIp = req.body.ip || req.ip;
+  const rawIp = req.body.ip ? req.body.ip : getIp(req).clientIp;
   const ip = rawIp.match(/^::ffff:/) ? rawIp.slice(7) : rawIp;
   if (typeof ip !== 'string' || !ip.match(/^\d+\.\d+\.\d+\.\d+$/)) {
     return res.send({ ip });
@@ -29,6 +31,9 @@ router.use((req, res, next) => next(createError(404)));
 
 // Error handler
 router.use((err, req, res, next) => {
+  if (err.status && (err.status < 400 || err.status > 499)) {
+    console.warn(err);
+  }
 
   const body = {
     message: getErrorMessage(err)
