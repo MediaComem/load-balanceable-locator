@@ -1,3 +1,5 @@
+const DEFAULT_IP_PLACEHOLDER = 'Enter an IP address';
+
 const app = new Vue({
   el: '#app',
   template: '#app-template',
@@ -30,7 +32,11 @@ function hasIpLocation() {
 }
 
 function ipPlaceholder() {
-  return this.currentIp || 'Enter an IP address';
+  if (!this.currentIp || this.currentIp === '127.0.0.1' || this.currentIp === '::1') {
+    return DEFAULT_IP_PLACEHOLDER;
+  } else {
+    return this.currentIp;
+  }
 }
 
 async function mounted() {
