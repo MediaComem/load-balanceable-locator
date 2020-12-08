@@ -6,10 +6,9 @@ IP locator web application that can be used to demonstrate
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Installation](#installation)
   - [Requirements](#requirements)
-  - [Setup](#setup)
+- [Installation](#installation)
+  - [Initial setup](#initial-setup)
   - [Run in development mode](#run-in-development-mode)
   - [Run in production mode](#run-in-production-mode)
 - [Configuration](#configuration)
@@ -18,13 +17,15 @@ IP locator web application that can be used to demonstrate
 
 
 
-## Installation
-
 ### Requirements
 
-* [Node.js][node] 10.x
+* [Node.js][node] 10+
 
-### Setup
+
+
+## Installation
+
+### Initial setup
 
 * Clone the repository.
 * Install dependencies.
